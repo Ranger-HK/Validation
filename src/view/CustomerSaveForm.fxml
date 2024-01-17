@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="654.0" prefWidth="485.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerSaveFormController">
+   <children>
+      <Label layoutX="21.0" layoutY="14.0" prefHeight="45.0" prefWidth="299.0" text="Save Customer Form">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Separator layoutX="21.0" layoutY="62.0" prefHeight="11.0" prefWidth="424.0" />
+      <JFXTextField fx:id="txtCustomerId" labelFloat="true" layoutX="56.0" layoutY="112.0" onAction="#moveNameOnAction" prefHeight="45.0" prefWidth="355.0" promptText="Customer Id">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtCustomerName" labelFloat="true" layoutX="56.0" layoutY="215.0" onAction="#moveAddresOnAction" prefHeight="45.0" prefWidth="355.0" promptText="Customer Name">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtCustomerAddress" labelFloat="true" layoutX="56.0" layoutY="318.0" onAction="#moveSalaryOnAction" prefHeight="45.0" prefWidth="355.0" promptText="Customer Address">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtCustomerSalary" labelFloat="true" layoutX="56.0" layoutY="421.0" prefHeight="45.0" prefWidth="355.0" promptText="Customer Salary">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="btnSaveCustomer" buttonType="RAISED" layoutX="140.0" layoutY="529.0" onAction="#SaveCusOnAction" prefHeight="54.0" prefWidth="205.0" style="-fx-background-color: #12CBC4;" text="Save Customer" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+   </children>
+</AnchorPane>
