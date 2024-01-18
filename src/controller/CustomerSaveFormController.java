@@ -47,16 +47,6 @@ public class CustomerSaveFormController {
 
     }
 
-    public void moveNameOnAction(ActionEvent actionEvent) {
-    }
-
-    public void moveAddresOnAction(ActionEvent actionEvent) {
-
-    }
-
-    public void moveSalaryOnAction(ActionEvent actionEvent) {
-    }
-
     public void txtClear() {
         txtCustomerId.clear();
         txtCustomerName.clear();
