@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="524.0" prefWidth="831.0" style="-fx-background-color: #f5f6fa;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashBoardFormController">
+   <children>
+      <Label layoutX="296.0" layoutY="13.0" prefHeight="54.0" prefWidth="239.0" text="Thogakade" underline="true">
+         <font>
+            <Font name="System Bold" size="42.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnCustomerSave" buttonType="RAISED" layoutX="266.0" layoutY="102.0" onAction="#customerSaveOnAction" prefHeight="44.0" prefWidth="300.0" style="-fx-background-color: #FFC312;" text="Customer Save Form">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnCustomerUpdate" buttonType="RAISED" layoutX="266.0" layoutY="162.0" onAction="#customerUpdateOnAction" prefHeight="44.0" prefWidth="300.0" style="-fx-background-color: #FFC312;" text="Customer Update Form">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnCustomerDelete" buttonType="RAISED" layoutX="266.0" layoutY="220.0" onAction="#customerDeleteOnAction" prefHeight="44.0" prefWidth="300.0" style="-fx-background-color: #FFC312;" text="Customer Delete Form">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnCustomerSearch" buttonType="RAISED" layoutX="266.0" layoutY="279.0" onAction="#customerSearchOnAction" prefHeight="44.0" prefWidth="300.0" style="-fx-background-color: #FFC312;" text="Customer Search Form">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnSelectAllCustomer" buttonType="RAISED" layoutX="266.0" layoutY="339.0" onAction="#customerSelectAllOnAction" prefHeight="44.0" prefWidth="300.0" style="-fx-background-color: #FFC312;" text="Customer Select All Form">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnPlaceOrder" buttonType="RAISED" layoutX="266.0" layoutY="398.0" onAction="#customerPlaceOrderOnAction" prefHeight="44.0" prefWidth="300.0" style="-fx-background-color: #FFC312;" text="Place Order Form">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Separator layoutX="42.0" layoutY="48.0" prefWidth="200.0" />
+      <Separator layoutX="584.0" layoutY="48.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>
