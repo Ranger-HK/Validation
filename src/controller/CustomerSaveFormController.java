@@ -4,11 +4,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Customer;
 
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
 import java.util.regex.Pattern;
 
 /**
@@ -24,9 +26,17 @@ public class CustomerSaveFormController {
     public JFXTextField txtCustomerSalary;
     public JFXButton btnSaveCustomer;
 
+    LinkedHashMap<TextField,Pattern>allValidations=new LinkedHashMap<>();
+    Pattern idPattern = Pattern.compile("^(C00-)[0-9]{3,4}$");
+    Pattern namePattern = Pattern.compile("^[A-z ]{4,12}$");
+    Pattern addressPattern = Pattern.compile("^[A-z0-9/ ]{6,32}$");
+    Pattern salaryPattern = Pattern.compile("^[1-9][0-9]*([.][0-9]{2})?$");
+
     public void initialize() {
-        btnSaveCustomer.setDisable(true);
+        validateInit();
     }
+
+
 
     public void SaveCusOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         Customer c1 = new Customer(
@@ -55,68 +65,50 @@ public class CustomerSaveFormController {
     }
 
 
+    private void validateInit() {
+        btnSaveCustomer.setDisable(true);
+        allValidations.put(txtCustomerId,idPattern);
+        allValidations.put(txtCustomerName,namePattern);
+        allValidations.put(txtCustomerAddress,addressPattern);
+        allValidations.put(txtCustomerSalary,salaryPattern);
+
+    }
+
+
     public void textFieldOnKeyReleased(KeyEvent keyEvent) {
 
-        String idRegEx = "^(C00-)[0-9]{3,4}$";
-        String nameRegEx = "^[A-z ]{4,12}$";
-        String addressRegEx = "^[A-z0-9/ ]{6,32}$";
-        String salaryRegEx = "^[1-9][0-9]*([.][0-9]{2})?$";
+        Object response = validate();
 
-        Pattern idPattern = Pattern.compile(idRegEx);
-        Pattern namePattern = Pattern.compile(nameRegEx);
-        Pattern addressPattern = Pattern.compile(addressRegEx);
-        Pattern salaryPattern = Pattern.compile(salaryRegEx);
-
-        String typeTextId = txtCustomerId.getText();
-        String typeTextName = txtCustomerName.getText();
-        String typeTextAddress = txtCustomerAddress.getText();
-        String typeTextSalary = txtCustomerSalary.getText();
-
-
-        if (keyEvent.getCode() == KeyCode.ENTER) {
-            if (idPattern.matcher(typeTextId).matches()) {
-                txtCustomerId.setStyle("-fx-background-color: green");
-                txtCustomerName.requestFocus();
-
-
-                if (namePattern.matcher(typeTextName).matches()) {
-                    txtCustomerName.setStyle("-fx-background-color: green");
-                    txtCustomerAddress.requestFocus();
-
-
-                    if (addressPattern.matcher(typeTextAddress).matches()) {
-                        txtCustomerAddress.setStyle("-fx-background-color: green");
-                        txtCustomerSalary.requestFocus();
-
-
-                        if (salaryPattern.matcher(typeTextSalary).matches()) {
-                            txtCustomerSalary.setStyle("-fx-background-color: green");
-                            btnSaveCustomer.requestFocus();
-
-
-                        } else {
-                            txtCustomerSalary.setStyle("-fx-background-color: red");
-                            txtCustomerSalary.requestFocus();
-                        }
-
-                    } else {
-                        txtCustomerAddress.setStyle("-fx-background-color: red");
-                        txtCustomerAddress.requestFocus();
-                    }
-
-
-                } else {
-                    txtCustomerName.setStyle("-fx-background-color: red");
-                    txtCustomerName.requestFocus();
-                }
-
-
-            } else {
-                txtCustomerId.setStyle("-fx-background-color: red");
-                txtCustomerId.requestFocus();
-
-            }
+        if (response instanceof Boolean){
+            btnSaveCustomer.setDisable(false);
         }
 
+        if (keyEvent.getCode()==KeyCode.ENTER){
+            if (response instanceof TextField){
+                TextField textField = (TextField) response;
+                textField.requestFocus();
+            }
+        }
+    }
+
+    private Object validate(){
+        for (TextField textField : allValidations.keySet()){
+            Pattern pattern = allValidations.get(textField);
+            if (!pattern.matcher(textField.getText()).matches()){
+                addErrorToTheBoard(textField);
+                return textField;
+            }
+            removeError(textField);
+        }
+        return true;
+    }
+
+    private void removeError(TextField textField) {
+        textField.setStyle("-fx-background-color: green");
+    }
+
+    private void addErrorToTheBoard(TextField textField) {
+        textField.setStyle("-fx-background-color: red");
+        btnSaveCustomer.setDisable(true);
     }
 }
