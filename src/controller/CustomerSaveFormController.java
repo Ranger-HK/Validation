@@ -26,7 +26,10 @@ public class CustomerSaveFormController {
     public JFXTextField txtCustomerSalary;
     public JFXButton btnSaveCustomer;
 
+    //Create Hash Map
     LinkedHashMap<TextField,Pattern>allValidations=new LinkedHashMap<>();
+
+    //Set regex
     Pattern idPattern = Pattern.compile("^(C00-)[0-9]{3,4}$");
     Pattern namePattern = Pattern.compile("^[A-z ]{4,12}$");
     Pattern addressPattern = Pattern.compile("^[A-z0-9/ ]{6,32}$");
@@ -66,6 +69,7 @@ public class CustomerSaveFormController {
     }
 
 
+    //Store Values in  HashMap
     private void validateInit() {
         btnSaveCustomer.setDisable(true);
         allValidations.put(txtCustomerId,idPattern);
@@ -76,40 +80,56 @@ public class CustomerSaveFormController {
     }
 
 
+    //get response Of validate (Collect issue textField) method and set EnterKey Press
     public void textFieldOnKeyReleased(KeyEvent keyEvent) {
 
+        //get response
         Object response = validate();
 
-        if (response instanceof Boolean){
-            btnSaveCustomer.setDisable(false);
-        }
-
+        //enter key press event --> Response is error or Response is true
+        //Response is error -- check textFiled Object
         if (keyEvent.getCode()==KeyCode.ENTER){
             if (response instanceof TextField){
                 TextField textField = (TextField) response;
                 textField.requestFocus();
+
+            // Response is true -- check boolean
+            }else if(response instanceof Boolean){
+                new Alert(Alert.AlertType.INFORMATION,"Done").showAndWait();
             }
         }
     }
 
+    //print HashMap Values
     private Object validate(){
+        btnSaveCustomer.setDisable(true);
+
+        //print values
         for (TextField textField : allValidations.keySet()){
             Pattern pattern = allValidations.get(textField);
+
+            //printed vales check and return Error TextField
             if (!pattern.matcher(textField.getText()).matches()){
-                addErrorToTheBoard(textField);
+                if (!textField.getText().isEmpty()) {
+                    addErrorToTheBoard(textField);
+                }
                 return textField;
             }
             removeError(textField);
         }
+        // printed vales check and return true (Not Error)
+        btnSaveCustomer.setDisable(false);
         return true;
     }
 
+    //Error Code
     private void removeError(TextField textField) {
         textField.setStyle("-fx-background-color: green");
     }
 
+    //Right Code
     private void addErrorToTheBoard(TextField textField) {
         textField.setStyle("-fx-background-color: red");
-        btnSaveCustomer.setDisable(true);
+
     }
 }
