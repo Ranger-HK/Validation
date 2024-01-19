@@ -14,8 +14,8 @@ import java.util.regex.Pattern;
 public class Validation {
 
     //print HashMap Values
-    public static Object validate(LinkedHashMap<TextField,Pattern> allValidations, JFXButton btnSaveCustomer){
-        btnSaveCustomer.setDisable(true);
+    public static Object validate(LinkedHashMap<TextField,Pattern> allValidations, JFXButton button){
+        button.setDisable(true);
 
         //print values
         for (TextField textField : allValidations.keySet()){
@@ -31,7 +31,8 @@ public class Validation {
             textField.setStyle("-fx-background-color: green");
         }
         // printed vales check and return true (Not Error)
-        btnSaveCustomer.setDisable(false);
+
+        button.setDisable(false);
         return true;
     }
 }
