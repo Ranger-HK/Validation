@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Customer;
+import util.Validation;
 
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
@@ -84,7 +85,7 @@ public class CustomerSaveFormController {
     public void textFieldOnKeyReleased(KeyEvent keyEvent) {
 
         //get response
-        Object response = validate();
+        Object response = Validation.validate(allValidations,btnSaveCustomer);
 
         //enter key press event --> Response is error or Response is true
         //Response is error -- check textFiled Object
@@ -100,27 +101,6 @@ public class CustomerSaveFormController {
         }
     }
 
-    //print HashMap Values
-    private Object validate(){
-        btnSaveCustomer.setDisable(true);
-
-        //print values
-        for (TextField textField : allValidations.keySet()){
-            Pattern pattern = allValidations.get(textField);
-
-            //printed vales check and return Error TextField
-            if (!pattern.matcher(textField.getText()).matches()){
-                if (!textField.getText().isEmpty()) {
-                    addErrorToTheBoard(textField);
-                }
-                return textField;
-            }
-            removeError(textField);
-        }
-        // printed vales check and return true (Not Error)
-        btnSaveCustomer.setDisable(false);
-        return true;
-    }
 
     //Error Code
     private void removeError(TextField textField) {

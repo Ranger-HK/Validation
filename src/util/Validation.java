@@ -1,48 +1,37 @@
 package util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.jfoenix.controls.JFXButton;
+import javafx.scene.control.TextField;
+
+import java.util.LinkedHashMap;
+import java.util.regex.Pattern;
 
 /**
  * @Created By Ravindu Prathibha
- * @created 1/19/2024 - 3:56 PM
+ * @created 1/19/2024 - 5:49 PM
  * @project Validation
  */
 public class Validation {
 
-    public static void main(String[] args) {
-        ArrayList arrayList = new ArrayList();
-        arrayList.add("A");
-        arrayList.add("B");
-        arrayList.add("C");
-        arrayList.add("D");
+    //print HashMap Values
+    public static Object validate(LinkedHashMap<TextField,Pattern> allValidations, JFXButton btnSaveCustomer){
+        btnSaveCustomer.setDisable(true);
 
+        //print values
+        for (TextField textField : allValidations.keySet()){
+            Pattern pattern = allValidations.get(textField);
 
-        for (Object o : arrayList) {
-            System.out.println(o);
+            //printed vales check and return Error TextField
+            if (!pattern.matcher(textField.getText()).matches()){
+                if (!textField.getText().isEmpty()) {
+                    textField.setStyle("-fx-background-color: red");
+                }
+                return textField;
+            }
+            textField.setStyle("-fx-background-color: green");
         }
-
-        HashMap hashMap = new HashMap();
-        hashMap.put("IJSE","Institute Of Software Engineering");
-        hashMap.put("SE","Software Engineer");
-
-        Object ijse = hashMap.get("IJSE");
-        System.out.println(ijse);
-
-        for (Object o : hashMap.keySet()) {
-            System.out.println(o);
-        }
-
-        for (Object key : hashMap.keySet()) {
-            Object values = hashMap.get(key);
-            System.out.println(values);
-        }
-
-        for (Object key : hashMap.keySet()) {
-            Object values = hashMap.get(key);
-            System.out.println(key+" : "+values);
-        }
+        // printed vales check and return true (Not Error)
+        btnSaveCustomer.setDisable(false);
+        return true;
     }
-
-
 }
