@@ -32,6 +32,7 @@ public class CustomerSaveFormController {
     Pattern addressPattern = Pattern.compile("^[A-z0-9/ ]{6,32}$");
     Pattern salaryPattern = Pattern.compile("^[1-9][0-9]*([.][0-9]{2})?$");
 
+
     public void initialize() {
         validateInit();
     }
